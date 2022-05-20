@@ -6,7 +6,7 @@
 template <typename T>
 class TrackerTest : public ::testing::Test {
     private:
-        const double deviation_percentage = 0.05;
+        const double deviation_percentage = 0.001;
     public:
         void load_data(const std::string fn) {
             m_tracker = std::make_unique<T> (fn);
@@ -31,7 +31,7 @@ TYPED_TEST(TrackerTest, EarthPosition)
     this->load_data("test/etc/planets.txt");
 
     Track t = this->m_tracker->track("Earth", 1000, 1);
-    ASSERT_TRUE(this->check(t.back(), {1.49601e+11, 2.98e+07}));
+    ASSERT_TRUE(this->check(t.back(), {1.49599e+11, 2.98e+07}));
 }
 
 TYPED_TEST(TrackerTest, SunPosition)
@@ -39,7 +39,7 @@ TYPED_TEST(TrackerTest, SunPosition)
     this->load_data("test/etc/planets.txt");
 
     Track t = this->m_tracker->track("Sun", 1000, 1);
-    ASSERT_TRUE(this->check(t.back(), {-8.84959, -0.000753247}));
+    ASSERT_TRUE(this->check(t.back(), {8.84964, 0.000753268}));
 }
 
 TYPED_TEST(TrackerTest, VenusPosition)
@@ -47,7 +47,7 @@ TYPED_TEST(TrackerTest, VenusPosition)
     this->load_data("test/etc/planets.txt");
 
     Track t = this->m_tracker->track("Venus", 1000, 1);
-    ASSERT_TRUE(this->check(t.back(), {1.08202e+11, 3.50002e+07}));
+    ASSERT_TRUE(this->check(t.back(), {1.08198e+11, 3.49998e+07}));
 }
 
 TYPED_TEST(TrackerTest, EarthPosition2)
@@ -55,7 +55,7 @@ TYPED_TEST(TrackerTest, EarthPosition2)
     this->load_data("test/etc/planets2.txt");
 
     Track t = this->m_tracker->track("Earth", 1000, 1);
-    ASSERT_TRUE(this->check(t.back(), {-6.30704e+10, -5.67287e+08}));
+    ASSERT_TRUE(this->check(t.back(), {-6.19286e+10, -5.64705e+08}));
 }
 
 TYPED_TEST(TrackerTest, VenusPosition2)
@@ -63,5 +63,5 @@ TYPED_TEST(TrackerTest, VenusPosition2)
     this->load_data("test/etc/planets2.txt");
 
     Track t = this->m_tracker->track("Venus", 1000, 1);
-    ASSERT_TRUE(this->check(t.back(), {5.67287e+08, -6.30704e+10}));
+    ASSERT_TRUE(this->check(t.back(), {5.64705e+08, -6.19286e+10}));
 }
